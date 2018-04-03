@@ -205,7 +205,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "COMTest";
-            this.Text = "COMTest";
+            this.Text = "COMTest - By Latheesan Kanesamoorthy";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.COMTest_FormClosing);
             this.Load += new System.EventHandler(this.COMTest_Load);
             this.ResumeLayout(false);
