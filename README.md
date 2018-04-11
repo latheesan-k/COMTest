@@ -10,8 +10,4 @@ Simple COM Port Testing utility in C#. This demo app also demonstrates the follo
 
 ## Demo
 
-![screenshot1](https://raw.githubusercontent.com/latheesan-k/COMTest/master/Screenshots/1.png)
-
-![screenshot2](https://raw.githubusercontent.com/latheesan-k/COMTest/master/Screenshots/2.png)
-
-![screenshot3](https://raw.githubusercontent.com/latheesan-k/COMTest/master/Screenshots/3.png)
+![screenshot](https://raw.githubusercontent.com/latheesan-k/COMTest/master/screenshot.png)

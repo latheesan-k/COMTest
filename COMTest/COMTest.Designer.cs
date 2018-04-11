@@ -34,7 +34,7 @@
             this.baudRate = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.speed = new System.Windows.Forms.TextBox();
+            this.dataBits = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.actionButton = new System.Windows.Forms.Button();
             this.outputBox = new System.Windows.Forms.RichTextBox();
@@ -43,6 +43,14 @@
             this.sendButton = new System.Windows.Forms.Button();
             this.parity = new System.Windows.Forms.ComboBox();
             this.stopBits = new System.Windows.Forms.ComboBox();
+            this.flowControl = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.rtsEnable = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lfChar = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.timeoutMS = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // comPortList
@@ -94,17 +102,17 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(500, 16);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Speed (Bits):";
+            this.label4.Text = "Data Bits:";
             // 
-            // speed
+            // dataBits
             // 
-            this.speed.Location = new System.Drawing.Point(573, 12);
-            this.speed.Name = "speed";
-            this.speed.Size = new System.Drawing.Size(74, 20);
-            this.speed.TabIndex = 2;
-            this.speed.Text = "8";
+            this.dataBits.Location = new System.Drawing.Point(559, 12);
+            this.dataBits.Name = "dataBits";
+            this.dataBits.Size = new System.Drawing.Size(88, 20);
+            this.dataBits.TabIndex = 2;
+            this.dataBits.Text = "8";
             // 
             // label5
             // 
@@ -137,7 +145,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 45);
+            this.label6.Location = new System.Drawing.Point(671, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 1;
@@ -146,16 +154,16 @@
             // inputData
             // 
             this.inputData.Enabled = false;
-            this.inputData.Location = new System.Drawing.Point(52, 42);
+            this.inputData.Location = new System.Drawing.Point(711, 43);
             this.inputData.Name = "inputData";
-            this.inputData.Size = new System.Drawing.Size(759, 20);
+            this.inputData.Size = new System.Drawing.Size(100, 20);
             this.inputData.TabIndex = 2;
-            this.inputData.Text = "Hello World";
+            this.inputData.Text = "~00150 1";
             // 
             // sendButton
             // 
             this.sendButton.Enabled = false;
-            this.sendButton.Location = new System.Drawing.Point(817, 40);
+            this.sendButton.Location = new System.Drawing.Point(817, 42);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(101, 23);
             this.sendButton.TabIndex = 3;
@@ -181,23 +189,103 @@
             this.stopBits.Size = new System.Drawing.Size(100, 21);
             this.stopBits.TabIndex = 0;
             // 
+            // flowControl
+            // 
+            this.flowControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.flowControl.FormattingEnabled = true;
+            this.flowControl.Location = new System.Drawing.Point(91, 43);
+            this.flowControl.Name = "flowControl";
+            this.flowControl.Size = new System.Drawing.Size(149, 21);
+            this.flowControl.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 47);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Flow Control:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(246, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "RTS Enable:";
+            // 
+            // rtsEnable
+            // 
+            this.rtsEnable.AutoSize = true;
+            this.rtsEnable.Checked = true;
+            this.rtsEnable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rtsEnable.Location = new System.Drawing.Point(316, 47);
+            this.rtsEnable.Name = "rtsEnable";
+            this.rtsEnable.Size = new System.Drawing.Size(15, 14);
+            this.rtsEnable.TabIndex = 5;
+            this.rtsEnable.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(342, 47);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "LF Char:";
+            // 
+            // lfChar
+            // 
+            this.lfChar.Location = new System.Drawing.Point(395, 43);
+            this.lfChar.Name = "lfChar";
+            this.lfChar.Size = new System.Drawing.Size(100, 20);
+            this.lfChar.TabIndex = 2;
+            this.lfChar.Text = "\\r";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(501, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Timeout MS:";
+            // 
+            // timeoutMS
+            // 
+            this.timeoutMS.Location = new System.Drawing.Point(574, 43);
+            this.timeoutMS.Name = "timeoutMS";
+            this.timeoutMS.Size = new System.Drawing.Size(73, 20);
+            this.timeoutMS.TabIndex = 2;
+            this.timeoutMS.Text = "250";
+            // 
             // COMTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 450);
+            this.Controls.Add(this.rtsEnable);
             this.Controls.Add(this.outputBox);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.actionButton);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.speed);
+            this.Controls.Add(this.timeoutMS);
+            this.Controls.Add(this.dataBits);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.inputData);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lfChar);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.baudRate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.flowControl);
             this.Controls.Add(this.stopBits);
             this.Controls.Add(this.parity);
             this.Controls.Add(this.comPortList);
@@ -221,7 +309,7 @@
         private System.Windows.Forms.TextBox baudRate;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox speed;
+        private System.Windows.Forms.TextBox dataBits;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button actionButton;
         private System.Windows.Forms.RichTextBox outputBox;
@@ -230,6 +318,14 @@
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.ComboBox parity;
         private System.Windows.Forms.ComboBox stopBits;
+        private System.Windows.Forms.ComboBox flowControl;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox rtsEnable;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox lfChar;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox timeoutMS;
     }
 }
 

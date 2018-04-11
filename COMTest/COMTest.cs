@@ -33,6 +33,9 @@ namespace COMTest
             stopBits.DataSource = Enum.GetValues(typeof(StopBits)).Cast<StopBits>();
             stopBits.SelectedIndex = 1;
 
+            flowControl.DataSource = Enum.GetValues(typeof(Handshake)).Cast<Handshake>();
+            flowControl.SelectedIndex = 0;
+
             WriteLog("Successfully loaded {0} COM port(s)", comPorts.Count);
         }
 
@@ -54,18 +57,21 @@ namespace COMTest
                         throw new Exception("invalid baud rate");
                     }
 
-                    if (string.IsNullOrEmpty(speed.Text))
+                    if (string.IsNullOrEmpty(dataBits.Text))
                     {
                         throw new Exception("invalid speed (bits)");
                     }
 
-                    port = new SerialPort(
-                        comPortList.SelectedItem.ToString(), 
-                        Convert.ToInt32(baudRate.Text), 
-                        (Parity)Enum.Parse(typeof(Parity), parity.Text),
-                        Convert.ToInt32(speed.Text),
-                        (StopBits)Enum.Parse(typeof(StopBits), stopBits.Text)
-                    );
+                    port = new SerialPort();
+                    port.PortName = comPortList.SelectedItem.ToString();
+                    port.BaudRate = Convert.ToInt32(baudRate.Text);
+                    port.Parity = (Parity)Enum.Parse(typeof(Parity), parity.Text);
+                    port.DataBits = Convert.ToInt32(dataBits.Text);
+                    port.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits.Text);
+                    port.Handshake = (Handshake)Enum.Parse(typeof(Handshake), flowControl.Text);
+                    port.RtsEnable = rtsEnable.Checked;
+                    port.ReadTimeout = Convert.ToInt32(timeoutMS.Text);
+                    port.WriteTimeout = Convert.ToInt32(timeoutMS.Text);
                     port.DataReceived += Port_DataReceived;
                     port.Open();
 
@@ -76,13 +82,17 @@ namespace COMTest
                     comPortList.Enabled = false;
                     baudRate.Enabled = false;
                     parity.Enabled = false;
-                    speed.Enabled = false;
+                    dataBits.Enabled = false;
                     stopBits.Enabled = false;
+                    flowControl.Enabled = false;
+                    rtsEnable.Enabled = false;
+                    lfChar.Enabled = false;
+                    timeoutMS.Enabled = false;
                     actionButton.Text = "Disconnect";
                 }
                 catch (Exception exception)
                 {
-                    WriteLog("Failed to connect - {0}", exception.Message);
+                    WriteLog("Failed to connect - {0}", exception.Message.Trim());
                 }
             }
             else
@@ -100,13 +110,17 @@ namespace COMTest
                     comPortList.Enabled = true;
                     baudRate.Enabled = true;
                     parity.Enabled = true;
-                    speed.Enabled = true;
+                    dataBits.Enabled = true;
                     stopBits.Enabled = true;
+                    flowControl.Enabled = true;
+                    rtsEnable.Enabled = true;
+                    lfChar.Enabled = true;
+                    timeoutMS.Enabled = true;
                     actionButton.Text = "Connect";
                 }
                 catch (Exception exception)
                 {
-                    WriteLog("Failed to disconnect - {0}", exception.Message);
+                    WriteLog("Failed to disconnect - {0}", exception.Message.Trim());
                 }
             }
         }
@@ -141,13 +155,17 @@ namespace COMTest
                     throw new Exception("You not entered the input data to write");
                 }
 
-                WriteLog("Writing: {0}", inputData.Text);
+                string inputDataText = string.Format("{0}{1}",
+                    inputData.Text,
+                    (!string.IsNullOrEmpty(lfChar.Text) ? lfChar.Text : ""));
+
+                WriteLog("Writing: {0}", inputDataText);
 
                 port.Write(inputData.Text);
             }
             catch (Exception exception)
             {
-                WriteLog("Failed to write data - {0}", exception.Message);
+                WriteLog("Failed to write data - {0}", exception.Message.Trim());
             }
         }
 
